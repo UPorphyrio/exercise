@@ -1,0 +1,23 @@
+#  测试后端代码
+name: test_server_code
+
+on:
+    push:
+        branches: [server]
+
+jobs:
+    build:
+      run-on: ubuntu-latest
+
+      steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        with:
+          java-version: 1.8
+      - name: Build Project
+        run: |
+          # change directory
+          cd ./server/src/com.exercise/
+          # run NVM
+          mvn test
+
