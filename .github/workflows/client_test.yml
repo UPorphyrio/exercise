@@ -1,6 +1,6 @@
 #  测试前端代码
 
-name: Node.js CI
+name: Node.js CI client test
 
 on:
   push:
