@@ -2,26 +2,28 @@
 name: test_client_code
 
 on:
-    push:
-        branches: [client]
+  push:
+    branches: [client]
 
 jobs:
-    build:
-      run-on: ubuntu-latest
+  build:
+    run-on: ubuntu-latest
 
-      strategy:
-        matrix:
-          node-version: [10.x,12.x,14.x]
-      steps:
-      - uses: actions/checkout@v2
-      - name: set node version
-        with:
-          node-version: ${{matrix.node-version}}
-      - run: |
-          # change directory
-          cd client/src
-          # install packages
-          npm install
-          # run test
-          npm run-srcipt test
+    strategy:
+      matrix:
+        node-version: [10.x,12.x,14.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: set node version
+      with:
+        node-version: ${{matrix.node-version}}
+
+    - name: Project CI
+      run: |
+        # change directory
+        cd client/src
+        # install packages
+        npm install
+        # run test
+        npm run-srcipt test
 
