@@ -1,29 +1,26 @@
 #  测试前端代码
-name: test_client_code
+
+name: Node.js CI
 
 on:
   push:
-    branches: [client]
-
+    branches: [ client ]
 jobs:
   build:
-    run-on: ubuntu-latest
+
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [10.x,12.x,14.x]
+        node-version: [10.x, 12.x, 14.x]
+
     steps:
     - uses: actions/checkout@v2
-    - name: set node version
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
       with:
-        node-version: ${{matrix.node-version}}
-
-    - name: Project CI
-      run: |
-        # change directory
-        cd client/src
-        # install packages
-        npm install
-        # run test
-        npm run-srcipt test
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
 
